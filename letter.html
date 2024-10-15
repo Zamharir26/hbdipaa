@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Interaktif</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: background-color 0.5s, color 0.5s;
+        }
+        .page {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        .page.active {
+            display: flex;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .cool { background-color: #a7dcef; color: #3d8fb2; }
+        .happy { background-color: #ffd700; color: #8b4513; }
+        .romance { background-color: #ffb6c1; color: #8b0000; }
+        .sad { background-color: #778899; color: #2f4f4f; }
+        .positive { background-color: #90ee90; color: #006400; }
+        .spirit { background-color: #ff4500; color: #ffffff; }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            max-width: 400px;
+        }
+        input {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: inherit;
+        }
+        .error-message {
+            color: #ff4444;
+            font-weight: bold;
+        }
+        button, a {
+            padding: 12px 24px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        button:hover, a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .cool button, .cool a { background-color: #346ea4; color: #ffffff; }
+        .happy button, .happy a { background-color: #8b4513; color: #ffd700; }
+        .romance button, .romance a { background-color: #8b0000; color: #ffb6c1; }
+        .sad button, .sad a { background-color: #2f4f4f; color: #ffffff; }
+        .positive button, .positive a { background-color: #006400; color: #90ee90; }
+        .spirit button, .spirit a { background-color: #ffffff; color: #ff4500; }
+        .exit-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #d32f2f;
+            color: #fff;
+        }
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 30px;
+        }
+        .nav-buttons a {
+            width: 45%;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body class="cool">
+    <div id="page1" class="page active cool">
+        <h1>Selamat Datang</h1>
+        <form id="loginForm" onsubmit="validateForm(event)">
+            <input type="text" id="name" name="name" placeholder="Nama Penerima" required>
+            <input type="text" id="nickname" name="nickname" placeholder="Nama Panggilan" required>
+            <input type="text" id="sender" name="sender" placeholder="Nama Pengirim" required>
+            <button type="submit">Masuk</button>
+        </form>
+        <p id="error" class="error-message"></p>
+    </div>
+    <div id="page2" class="page happy">
+        <h1>Senang!</h1>
+        <p>Halo, semoga harimu penuh kebahagiaan!</p>
+        <p>Dari: </p>
+        <div class="nav-buttons">
+            <a href="#" onclick="goToPage(1)">Kembali</a>
+            <a href="#" onclick="goToPage(3)">Lanjut</a>
+        </div>
+    </div>
+    <div id="page3" class="page romance">
+        <h1>Cinta!</h1>
+        <p>Setiap momen bersamamu adalah anugerah.</p>
+        <p>Dengan cinta: </p>
+        <div class="nav-buttons">
+            <a href="#" onclick="goToPage(2)">Kembali</a>
+            <a href="#" onclick="goToPage(4)">Lanjut</a>
+        </div>
+    </div>
+    <div id="page4" class="page sad">
+        <h1>Sedih!</h1>
+        <p>Jangan bersedih. Setiap awan gelap akan berlalu.</p>
+        <p>Selalu mendukungmu: </p>
+        <div class="nav-buttons">
+            <a href="#" onclick="goToPage(3)">Kembali</a>
+            <a href="#" onclick="goToPage(5)">Lanjut</a>
+        </div>
+    </div>
+    <div id="page5" class="page positive">
+        <h1>Positif!</h1>
+        <p>Tetap berpikir positif! Kamu lebih kuat dari yang kamu kira.</p>
+        <p>Mendukungmu: </p>
+        <div class="nav-buttons">
+            <a href="#" onclick="goToPage(4)">Kembali</a>
+            <a href="#" onclick="goToPage(6)">Lanjut</a>
+        </div>
+    </div>
+    <div id="page6" class="page spirit">
+        <h1>Semangat!</h1>
+        <p>Kamu pasti bisa, ! Teruslah melangkah maju!</p>
+        <p>Menyemangatimu: </p>
+        <div class="nav-buttons">
+            <a href="#" onclick="goToPage(5)">Kembali</a>
+            <a href="#" onclick="resetForm()">Mulai Ulang</a>
+        </div>
+    </div>
+    <a href="#" class="exit-button" onclick="exitPage()">Keluar</a>
+    <script>
+        const validNames = {
+            name: ["asyifa"],
+            nickname: ["ipaa"],
+            sender: ["ridwan"]
+        };
+        let currentNickname = "";
+        let currentSender = "";
+
+        function validateForm(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value.toLowerCase().trim();
+            const nickname = document.getElementById('nickname').value.toLowerCase().trim();
+            const sender = document.getElementById('sender').value.toLowerCase().trim();
+            const errorElement = document.getElementById('error');
+
+            if (!validNames.name.includes(name)) {
+                showError("Nama Penerima tidak valid.");
+                return false;
+            }
+            if (!validNames.nickname.includes(nickname)) {
+                showError("Nama Panggilan tidak valid.");
+                return false;
+            }
+            if (!validNames.sender.includes(sender)) {
+                showError("Nama Pengirim tidak valid.");
+                return false;
+            }
+
+            currentNickname = nickname;
+            currentSender = sender;
+            errorElement.textContent = "";
+            goToPage(2);
+        }
+
+        function showError(message) {
+            const errorElement = document.getElementById('error');
+            errorElement.textContent = message;
+            errorElement.style.animation = 'none';
+            errorElement.offsetHeight; // Trigger reflow
+            errorElement.style.animation = 'shake 0.5s';
+        }
+
+        function goToPage(pageNumber) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            const activePage = document.getElementById(`page${pageNumber}`);
+            activePage.classList.add('active');
+            document.body.className = activePage.classList[1];
+
+        }
+
+        function resetForm() {
+            document.getElementById('loginForm').reset();
+            currentNickname = "";
+            currentSender = "";
+            goToPage(1);
+        }
+
+        function exitPage() {
+            if (confirm("Apakah Anda yakin ingin keluar?")) {
+                window.location.href = "https://www.google.com";
+            }
+        }
+
+        // Add keydown event listener for navigation
+        document.addEventListener('keydown', function(event) {
+            const currentPage = document.querySelector('.page.active');
+            const currentPageNumber = parseInt(currentPage.id.replace('page', ''));
+
+            if (event.key === 'ArrowLeft' && currentPageNumber > 1) {
+                goToPage(currentPageNumber - 1);
+            } else if (event.key === 'ArrowRight' && currentPageNumber < 6) {
+                goToPage(currentPageNumber + 1);
+            }
+        });
+    </script>
+</body>
+</html>
